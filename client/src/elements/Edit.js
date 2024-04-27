@@ -91,14 +91,15 @@ const Edit = () => {
     } else {
       alert("data added");
       // history.push("/");
-      navigate("/");
+      navigate("/home");
+
       setUpdata(data2);
     }
   };
 
   return (
     <div className="container ">
-      <NavLink to="/">Home2</NavLink>
+      <NavLink to="/home">Home2</NavLink>
       <form className="mt-4">
         <div className="row">
           <div class="mb-3 col-lg-6 col-md-6 col-12">

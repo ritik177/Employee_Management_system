@@ -3,8 +3,10 @@ const router = new express.Router();
 const userdb = require("../models/userSchema");
 var bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
+//new add
+const employees = require("../models/employeeSchema");
 
-// for user registration
+// for user signup
 
 router.post("/signup", async (req, res) => {
   const { fname, email, password, cpassword } = req.body;
@@ -86,6 +88,7 @@ router.post("/login", async (req, res) => {
 });
 
 // user valid
+
 router.get("/validuser", authenticate, async (req, res) => {
   try {
     const ValidUserOne = await userdb.findOne({ _id: req.userId });
@@ -110,6 +113,106 @@ router.get("/logout", authenticate, async (req, res) => {
     res.status(201).json({ status: 201 });
   } catch (error) {
     res.status(401).json({ status: 401, error });
+  }
+});
+
+//register user
+router.post("/register", async (req, res) => {
+  // console.log(req.body);
+  // const {name} = req.body.name;
+  const { name, email, age, mobile, work, add, desc } = req.body; //variable defined
+
+  if (!name || !email || !age || !mobile || !work || !add || !desc) {
+    res.status(422).json("plz fill the data");
+  }
+
+  try {
+    const preuser = await employees.findOne({ email: email });
+    console.log(preuser);
+
+    if (preuser) {
+      res.status(422).json("this  employee  is already present");
+    } else {
+      const adduser = new employees({
+        name,
+        email,
+        age,
+        mobile,
+        work,
+        add,
+        desc,
+      });
+
+      // await adduser.save();
+      // res.status(201).json(adduser);
+      // console.log(adduser);
+
+      const savedUser = await adduser.save();
+      res.status(201).json(savedUser);
+      console.log(savedUser);
+    }
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
+//get userdata
+router.get("/getdata", async (req, res) => {
+  try {
+    const userdata = await employees.find();
+    res.status(201).json(userdata);
+    console.log(userdata);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
+// get individual user
+router.get("/getuser/:id", async (req, res) => {
+  try {
+    console.log(req.params);
+    const { id } = req.params;
+
+    const userindividual = await employees.findById({ _id: id });
+    console.log(userindividual);
+    res.status(201).json(userindividual);
+  } catch (error) {
+    res.status(422).jsom(error);
+  }
+});
+
+// update  user data
+router.put("/updateuser/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updateduser = await employees.findByIdAndUpdate(id, req.body, {
+      new: true,
+      //jo bhi update karenge wo updated value milegi by new:true)
+    });
+    if (!updateduser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log(updateduser);
+    res.status(201).json(updateduser);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
+//delete user
+router.delete("/deleteuser/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleteuser = await employees.findByIdAndDelete({ _id: id });
+    if (!deleteuser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log(deleteuser);
+    res.status(201).json(deleteuser);
+  } catch (error) {
+    res.status(422).json(error);
   }
 });
 

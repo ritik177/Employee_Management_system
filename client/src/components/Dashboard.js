@@ -29,7 +29,7 @@ const Dashboard = () => {
     } else {
       console.log("user verify");
       setLoginData(data);
-      history("/dash");
+      history("/home");
     }
   };
 
@@ -51,7 +51,7 @@ const Dashboard = () => {
             marginTop: "20px",
           }}
         >
-          <h1>User Email:{logindata ? logindata.ValidUserOne.email : ""}</h1>
+          {/* <h1>User Email:{logindata ? logindata.ValidUserOne.email : ""}</h1> */}
         </div>
       ) : (
         <Box

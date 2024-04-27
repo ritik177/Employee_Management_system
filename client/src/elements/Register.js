@@ -57,7 +57,7 @@ const Register = () => {
       console.log("error");
     } else {
       alert("data added");
-      navigate("/");
+      navigate("/home");
       setUdata(data);
       console.log("data added");
     }
@@ -65,7 +65,7 @@ const Register = () => {
 
   return (
     <div className="container ">
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
       <form className="mt-4">
         <div className="row">
           <div class="mb-3 col-lg-6 col-md-6 col-12">

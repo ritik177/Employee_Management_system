@@ -1,29 +1,23 @@
-import React, { createContext,useState } from 'react'
-
+import React, { createContext, useState } from "react";
 
 export const adddata = createContext("");
 export const updatedata = createContext("");
 export const deldata = createContext("");
 
-
-const ContextProvider = ({children}) => {
-
+const ContextProvider = ({ children }) => {
   const [udata, setUdata] = useState("");
   const [updata, setUpdata] = useState("");
   const [dltdata, setDLTdata] = useState("");
 
-
   return (
-    <adddata.Provider value={{udata,setUdata}}>
-        <updatedata.Provider value={{updata,setUpdata}}>
-          <deldata.Provider  value={{dltdata, setDLTdata}}>
+    <adddata.Provider value={{ udata, setUdata }}>
+      <updatedata.Provider value={{ updata, setUpdata }}>
+        <deldata.Provider value={{ dltdata, setDLTdata }}>
           {children}
-
-          </deldata.Provider>
-        </updatedata.Provider>
-
+        </deldata.Provider>
+      </updatedata.Provider>
     </adddata.Provider>
-  )
-}
+  );
+};
 
-export default ContextProvider
+export default ContextProvider;

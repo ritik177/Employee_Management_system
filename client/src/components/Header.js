@@ -58,7 +58,7 @@ const Header = () => {
     <>
       <header>
         <nav>
-          <NavLink to="/">
+          <NavLink to="/home">
             <h1>Employee Collection</h1>
           </NavLink>
           <div className="avtar">

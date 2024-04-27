@@ -6,6 +6,9 @@ const router = require("./routes/router");
 const cors = require("cors");
 const cookiParser = require("cookie-parser");
 const port = 8009;
+//add new
+const mongoose = require("mongoose");
+const employees = require("./models/employeeSchema");
 
 // app.get("/",(req,res)=>{
 //     res.status(201).json("server created")

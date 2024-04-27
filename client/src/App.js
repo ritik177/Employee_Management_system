@@ -9,6 +9,15 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { LoginContext } from "./components/ContextProvider/Context";
 
+// add new
+import Home from "./elements/Home";
+import Register from "./elements/Register";
+import Edit from "./elements/Edit";
+import Details from "./elements/Details";
+import "./App.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+
 function App() {
   const [data, setData] = useState(false);
 
@@ -56,6 +65,11 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dash" element={<Dashboard />} />
             <Route path="*" element={<Error />} />
+            {/* add new  */}
+            <Route path="/home" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/view/:id" element={<Details />} />
           </Routes>
         </>
       ) : (
